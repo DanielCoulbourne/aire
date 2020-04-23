@@ -47,7 +47,8 @@
                 // FIXME - 
                 //  This is broken as of now. The best I can do is disable you from 
                 //  re-adding an option, but I can't stop it from showing up in search results
-                
+                // See https://github.com/jshjohnson/Choices/issues/855#issuecomment-618187677
+
                 var current = choices_{{ $name }}._currentState.choices
                     .filter(function(choice) {
                         return !(choice.customProperties && choice.customProperties.disposable);

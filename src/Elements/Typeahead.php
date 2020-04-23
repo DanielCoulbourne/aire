@@ -3,20 +3,23 @@
 namespace Galahad\Aire\Elements;
 
 use Galahad\Aire\Aire;
+use Galahad\Aire\Elements\Concerns\HasOptions;
 use Galahad\Aire\Support\OptionsCollection;
 use Illuminate\Container\Container;
 
 class Typeahead extends Element
 {
-    public $name = 'typeahead';
+    use HasOptions;
     
+    public $name = 'typeahead';
     protected $plugin = 'typeahead';
     
     public function __construct(Aire $aire, Form $form = null)
     {
-        $this->view_data['options'] = new OptionsCollection();
-        
         parent::__construct($aire, $form);
+        
+        $this->view_data['multiple'] = false;
+        $this->view_data['allow_arbitrary_input'] = false;
     }
 
     public function render() : string
@@ -57,6 +60,13 @@ class Typeahead extends Element
     public function allowArbitraryInput(bool $allow_arbitrary_input = true) : self
     {
         $this->view_data['allow_arbitrary_input'] = $allow_arbitrary_input;
+        
+        return $this;
+    }
+    
+    public function name($value = null)
+    {
+        $this->attributes['name'] = $value;
         
         return $this;
     }
